@@ -13,7 +13,7 @@ final class CountryDetailViewModel: ObservableObject {
     
     // Propiedades publicadas que la vista de detalle observará.
     @Published var country: CountryModel?
-    @Published var isLoading: Bool = false
+    @Published var isLoading: Bool = true
     @Published var errorMessage: String?
     
     // El caso de uso para obtener el detalle.

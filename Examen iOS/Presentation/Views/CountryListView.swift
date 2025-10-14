@@ -10,7 +10,7 @@ import SwiftUI
 struct CountryListView: View {
     
     @StateObject private var viewModel: CountryListViewModel
-    @State private var selectedCountry: CountryModel? = nil
+//    @State private var selectedCountry: CountryModel? = nil
     
     init() {
         let countryAPI: CountryAPIProtocol = CountryAPI()
@@ -36,10 +36,9 @@ struct CountryListView: View {
                     }
                 } else {
                     List(viewModel.countries) { country in
-                        CountryRowView(country: country)
-                            .contentShape(Rectangle()) // Asegura que toda el área sea tappable
-                            .onTapGesture {
-                                self.selectedCountry = country
+                        NavigationLink(
+                            destination: CountryDetailView(countryName: country.name)) {
+                                CountryRowView(country: country)
                             }
                     }
                 }
@@ -49,9 +48,6 @@ struct CountryListView: View {
                 if viewModel.countries.isEmpty {
                     viewModel.loadCountries()
                 }
-            }
-            .sheet(item: $selectedCountry) { country in
-                CountryDetailView(countryName: country.name)
             }
         }
     }

@@ -14,7 +14,7 @@ import Combine
 final class CountryListViewModel: ObservableObject {
     
     @Published var countries: [CountryModel] = []
-    @Published var isLoading: Bool = false
+    @Published var isLoading: Bool = true
     @Published var errorMessage: String?
     
     private let fetchAllCountriesUseCase: FetchAllCountriesUseCase

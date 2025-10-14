@@ -12,18 +12,9 @@ struct CountryRowView: View {
     
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: country.flagURL ?? "")) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 50, height: 30)
-                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                    .shadow(radius: 2)
-            } placeholder: {
-                RoundedRectangle(cornerRadius: 5)
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(width: 50, height: 30)
-            }
+            Text(country.flagEmoji ?? "🏳️")
+                .font(.largeTitle)
+                .frame(width: 50, alignment: .center)
             Text(country.name)
                 .font(.headline)
             Spacer()

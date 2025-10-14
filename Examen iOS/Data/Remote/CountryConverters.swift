@@ -21,6 +21,12 @@ public struct CountryAllConverter: Codable {
     let flags: FlagsConverter?
     let cca2: String?
     let flagEmoji: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case name, flags, cca2
+        case flagEmoji = "flag"
+    }
+    
 }
 
 
