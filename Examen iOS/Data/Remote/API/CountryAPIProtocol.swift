@@ -9,8 +9,13 @@ import Foundation
 
 public protocol CountryAPIProtocol {
     
-    func getAll(fields: [String]) async throws -> [CountryConverter]
-    
-    
+    func getAll(fields: [String]) async throws -> [CountryAllConverter]
+    func getCountryDetailByName(_ name: String) async throws -> [CountryDetailConverter]
+    func getCountryRegionAndSubregion(name: String) async throws -> [CountryRegionConverter]
+    func getCountryCapital(name: String) async throws -> [CountryCapitalConverter]
+    func getCountryPopulation(name: String) async throws -> [CountryPopulationConverter]
+    func getCountryLanguages(name: String) async throws -> [CountryLanguagesConverter]
+    func getCountryCurrencies(name: String) async throws ->[CountryCurrenciesConverter]
+    func getCountryFlags(name: String) async throws -> [CountryFlagsConverter]
     
 }
