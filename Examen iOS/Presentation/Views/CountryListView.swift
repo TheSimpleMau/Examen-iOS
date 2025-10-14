@@ -1,16 +1,10 @@
-//
-//  CountryListView.swift
-//  Examen iOS
-//
-//  Created by Mauricio Olguín on 14/10/25.
-//
-
 import SwiftUI
 
 struct CountryListView: View {
     
     @StateObject private var viewModel: CountryListViewModel
-//    @State private var selectedCountry: CountryModel? = nil
+    @State private var navigationPath = NavigationPath()
+    @State private var didNavigateOnAppear = false
     
     init() {
         let countryAPI: CountryAPIProtocol = CountryAPI()
@@ -21,7 +15,7 @@ struct CountryListView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $navigationPath) {
             Group {
                 if viewModel.isLoading {
                     ProgressView("Cargando países...")
@@ -35,18 +29,27 @@ struct CountryListView: View {
                             .padding()
                     }
                 } else {
-                    List(viewModel.countries) { country in
-                        NavigationLink(
-                            destination: CountryDetailView(countryName: country.name)) {
-                                CountryRowView(country: country)
-                            }
+                    List(viewModel.filteredCountries) { country in
+                        NavigationLink(value: country.name) {
+                            CountryRowView(country: country)
+                        }
                     }
+                    .searchable(text: $viewModel.searchText, prompt: "Buscar un país")
                 }
             }
             .navigationTitle("🗺️ Países del Mundo")
+            .navigationDestination(for: String.self) { countryName in
+                CountryDetailView(countryName: countryName)
+            }
             .onAppear {
                 if viewModel.countries.isEmpty {
                     viewModel.loadCountries()
+                }
+                if !didNavigateOnAppear {
+                    if let countryName = viewModel.getLastVisitedCountryName() {
+                        navigationPath.append(countryName)
+                        didNavigateOnAppear = true
+                    }
                 }
             }
         }

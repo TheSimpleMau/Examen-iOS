@@ -1,10 +1,3 @@
-//
-//  CountryDetailView.swift
-//  Examen iOS
-//
-//  Created by Mauricio Olguín on 14/10/25.
-//
-
 import SwiftUI
 
 struct CountryDetailView: View {
@@ -54,11 +47,11 @@ struct CountryDetailView: View {
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                             
-                            InfoRow(label: "Capital: ", value: country.capital ?? "N/A")
-                            InfoRow(label: "Población: ", value: "\(country.population ?? 0)")
-                            InfoRow(label: "Región: ", value: country.region ?? "N/A")
-                            InfoRow(label: "Subregión: ", value: country.subregion ?? "N/A")
-                            InfoRow(label: "Idiomas: ", value: country.languages?.joined(separator: ", ") ?? "N/A")
+                            InfoRow(label: "Capital", value: country.capital ?? "N/A")
+                            InfoRow(label: "Población", value: "\(country.population ?? 0)")
+                            InfoRow(label: "Región", value: country.region ?? "N/A")
+                            InfoRow(label: "Subregión", value: country.subregion ?? "N/A")
+                            InfoRow(label: "Idiomas", value: country.languages?.joined(separator: ", ") ?? "N/A")
                             if let currencies = country.currencies {
                                 ForEach(currencies, id: \.code) { currency in
                                     InfoRow(
