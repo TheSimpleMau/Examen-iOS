@@ -7,20 +7,36 @@
 
 import Foundation
 
-import Foundation
-
-public struct CountryAllConverter: Codable {
-    struct NameConverter: Codable { let common: String? }
-    struct FlagsConverter: Codable { let png: String?; let svg: String?; let alt: String? }
+struct CountryAllConverter: Codable {
+    struct NameConverter: Codable {
+        let common: String?
+    }
+    struct FlagsConverter: Codable {
+        let png: String?
+        let svg: String?
+        let alt: String?
+    }
+    
     let name: NameConverter?
     let flags: FlagsConverter?
     let cca2: String?
 }
 
-public struct CountryDetailConverter: Codable {
-    struct NameConverter: Codable { let common: String?; let official: String? }
-    struct FlagsConverter: Codable { let png: String?; let svg: String?; let alt: String? }
-    struct CurrencyConverter: Codable { let name: String?; let symbol: String? }
+
+struct CountryDetailConverter: Codable {
+    struct NameConverter: Codable {
+        let common: String?
+        let official: String?
+    }
+    struct FlagsConverter: Codable {
+        let png: String?
+        let svg: String?
+        let alt: String?
+    }
+    struct CurrencyConverter: Codable {
+        let name: String?
+        let symbol: String?
+    }
 
     let name: NameConverter?
     let flags: FlagsConverter?
@@ -34,34 +50,33 @@ public struct CountryDetailConverter: Codable {
 }
 
 
-public struct CountryRegionConverter: Codable {
+struct CountryRegionConverter: Codable {
     let region: String?
     let subregion: String?
     let name: CountryDetailConverter.NameConverter?
 }
 
-public struct CountryCapitalConverter: Codable {
+struct CountryCapitalConverter: Codable {
     let capital: [String]?
     let name: CountryDetailConverter.NameConverter?
 }
 
-public struct CountryPopulationConverter: Codable {
+struct CountryPopulationConverter: Codable {
     let population: Int?
     let name: CountryDetailConverter.NameConverter?
 }
 
-public struct CountryLanguagesConverter: Codable {
+struct CountryLanguagesConverter: Codable {
     let languages: [String: String]?
     let name: CountryDetailConverter.NameConverter?
 }
 
-public struct CountryCurrenciesConverter: Codable {
+struct CountryCurrenciesConverter: Codable {
     let currencies: [String: CountryDetailConverter.CurrencyConverter]?
     let name: CountryDetailConverter.NameConverter?
 }
 
-public struct CountryFlagsConverter: Codable {
+struct CountryFlagsConverter: Codable {
     let flags: CountryDetailConverter.FlagsConverter?
     let name: CountryDetailConverter.NameConverter?
 }
-
