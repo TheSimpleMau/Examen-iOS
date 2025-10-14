@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CountryAllConverter: Codable {
+public struct CountryAllConverter: Codable {
     struct NameConverter: Codable {
         let common: String?
     }
@@ -23,7 +23,7 @@ struct CountryAllConverter: Codable {
 }
 
 
-struct CountryDetailConverter: Codable {
+public struct CountryDetailConverter: Codable {
     struct NameConverter: Codable {
         let common: String?
         let official: String?
@@ -50,33 +50,33 @@ struct CountryDetailConverter: Codable {
 }
 
 
-struct CountryRegionConverter: Codable {
+public struct CountryRegionConverter: Codable {
     let region: String?
     let subregion: String?
     let name: CountryDetailConverter.NameConverter?
 }
 
-struct CountryCapitalConverter: Codable {
+public struct CountryCapitalConverter: Codable {
     let capital: [String]?
     let name: CountryDetailConverter.NameConverter?
 }
 
-struct CountryPopulationConverter: Codable {
+public struct CountryPopulationConverter: Codable {
     let population: Int?
     let name: CountryDetailConverter.NameConverter?
 }
 
-struct CountryLanguagesConverter: Codable {
+public struct CountryLanguagesConverter: Codable {
     let languages: [String: String]?
     let name: CountryDetailConverter.NameConverter?
 }
 
-struct CountryCurrenciesConverter: Codable {
+public struct CountryCurrenciesConverter: Codable {
     let currencies: [String: CountryDetailConverter.CurrencyConverter]?
     let name: CountryDetailConverter.NameConverter?
 }
 
-struct CountryFlagsConverter: Codable {
+public struct CountryFlagsConverter: Codable {
     let flags: CountryDetailConverter.FlagsConverter?
     let name: CountryDetailConverter.NameConverter?
 }
