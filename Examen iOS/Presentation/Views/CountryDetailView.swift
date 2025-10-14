@@ -74,10 +74,8 @@ struct CountryDetailView: View {
         }
         .navigationTitle(countryName)
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            if viewModel.country == nil {
-                viewModel.loadCountryDetail(name: countryName)
-            }
+        .task {
+            await viewModel.loadCountryDetail(name: countryName)
         }
     }
 }
