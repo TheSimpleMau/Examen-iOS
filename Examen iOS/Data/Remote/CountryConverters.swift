@@ -20,6 +20,7 @@ public struct CountryAllConverter: Codable {
     let name: NameConverter?
     let flags: FlagsConverter?
     let cca2: String?
+    let flagEmoji: String?
 }
 
 

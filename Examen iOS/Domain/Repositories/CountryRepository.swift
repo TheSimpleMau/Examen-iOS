@@ -25,7 +25,7 @@ final class CountryRepository: CountryRepositoryProtocol {
                 id: id,
                 name: name,
                 flagURL: converter.flags?.png,
-                flagEmoji: nil
+                flagEmoji: converter.flagEmoji
             )
         }
         return countryModels

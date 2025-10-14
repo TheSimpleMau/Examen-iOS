@@ -10,6 +10,7 @@ import SwiftUI
 struct CountryListView: View {
     
     @StateObject private var viewModel: CountryListViewModel
+    @State private var selectedCountry: CountryModel? = nil
     
     init() {
         let countryAPI: CountryAPIProtocol = CountryAPI()
@@ -35,15 +36,22 @@ struct CountryListView: View {
                     }
                 } else {
                     List(viewModel.countries) { country in
-                        Text(country.name)
+                        CountryRowView(country: country)
+                            .contentShape(Rectangle()) // Asegura que toda el área sea tappable
+                            .onTapGesture {
+                                self.selectedCountry = country
+                            }
                     }
                 }
             }
-            .navigationTitle("Países del Mundo")
+            .navigationTitle("🗺️ Países del Mundo")
             .onAppear {
                 if viewModel.countries.isEmpty {
                     viewModel.loadCountries()
                 }
+            }
+            .sheet(item: $selectedCountry) { country in
+                CountryDetailView(countryName: country.name)
             }
         }
     }
