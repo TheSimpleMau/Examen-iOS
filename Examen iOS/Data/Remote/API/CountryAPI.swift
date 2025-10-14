@@ -58,7 +58,7 @@ final class CountryAPI: CountryAPIProtocol {
 
     func getAll() async throws -> [CountryAllConverter] {
         let path = "/all"
-        let fields = ["name","flags","cca2"]
+        let fields = ["name","flags","cca2", "flag"]
         let url = try buildURL(path: path, fields: fields)
         return try await performRequest(url: url)
     }
@@ -66,7 +66,7 @@ final class CountryAPI: CountryAPIProtocol {
     func getCountryDetailByName(_ name: String) async throws -> [CountryDetailConverter] {
         let encoded = name.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? name
         let path = "/name/\(encoded)"
-        let fields = ["name","flags","region","subregion","capital","population","languages","currencies","cca2"]
+        let fields = ["name","flags","region","subregion","capital","population","languages","currencies","cca2", "flag"]
         let url = try buildURL(path: path, fields: fields)
         return try await performRequest(url: url)
     }

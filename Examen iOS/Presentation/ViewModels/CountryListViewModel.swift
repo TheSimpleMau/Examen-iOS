@@ -6,21 +6,30 @@
 //
 
 import Foundation
-
-import Foundation
 import Combine
 
 @MainActor
 final class CountryListViewModel: ObservableObject {
     
     @Published var countries: [CountryModel] = []
-    @Published var isLoading: Bool = false
+    @Published var isLoading: Bool = true
     @Published var errorMessage: String?
+    @Published var searchText: String = ""
+    
+    var filteredCountries: [CountryModel] {
+        if searchText.isEmpty {
+            return countries
+        } else {
+            return countries.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        }
+    }
     
     private let fetchAllCountriesUseCase: FetchAllCountriesUseCase
+    private let userPreferences: UserPreferences
     
-    init(fetchAllCountriesUseCase: FetchAllCountriesUseCase) {
+    init(fetchAllCountriesUseCase: FetchAllCountriesUseCase, userPreferences: UserPreferences = .shared) {
         self.fetchAllCountriesUseCase = fetchAllCountriesUseCase
+        self.userPreferences = userPreferences
     }
     
     func loadCountries() {
@@ -37,5 +46,8 @@ final class CountryListViewModel: ObservableObject {
             self.isLoading = false
         }
     }
+    
+    func getLastVisitedCountryName() -> String? {
+        userPreferences.getLastVisitedCountry()
+    }
 }
-
