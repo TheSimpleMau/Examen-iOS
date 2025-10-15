@@ -42,17 +42,17 @@ final class CountryListViewModel: ObservableObject {
                 self.countries = fetchedCountries.sorted { $0.name < $1.name }
             } catch {
                 if let apiError = error as? CountryAPIError {
-                                switch apiError {
-                                case .noInternetConnection:
-                                    self.errorMessage = "error con la conexión\n¿tienes internet 🧐? verificalo para continuar"
-                                case .serverError:
-                                    self.errorMessage = "error el servidor ;(\nintenta más tarde"
-                                default:
-                                    self.errorMessage = "Error al cargar los países :(\n \(error.localizedDescription)"
-                                }
-                            } else {
-                                self.errorMessage = "Error al cargar los países :(\n \(error.localizedDescription)"
-                            }
+                    switch apiError {
+                    case .noInternetConnection:
+                        self.errorMessage = "error con la conexión\n¿tienes internet 🧐? verificalo para continuar"
+                    case .serverError:
+                        self.errorMessage = "error el servidor ;(\nintenta más tarde"
+                    default:
+                        self.errorMessage = "Error al cargar los países :(\n \(error.localizedDescription)"
+                    }
+                } else {
+                    self.errorMessage = "Error al cargar los países :(\n \(error.localizedDescription)"
+                }
             }
             self.isLoading = false
         }

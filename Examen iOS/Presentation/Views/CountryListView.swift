@@ -90,8 +90,9 @@ struct InfoCardView: View {
         """
         ¡Hola profesores!
         
-        El tiempo no me ha dado para entregarlo para obtener el 100 :(
-        Pero aquí le dejo una breve explicación de cómo es que fue estruturdo esta aplicación :)
+        El tiempo no me ha dado para entregarlo a tiempo y obtener el 100 :(
+        
+        Pero aquí les dejo la breve explicación de cómo es que está estruturdo mi aplicación :)
 
         • Arquitectura:
         La app utiliza MVVM y principios de Clean Architecture. La estructura separa la presentación, el dominio y datos. Para la parte de la presentación, esta está compuesta por las `Views` y los `ViewsModels`. Luego, tenemos la parte del dominio, la cual conitene los `Models`, los `UseCases` y los `Protocols`. Por último, tenemos la parte de los datos, la cual, incluye implementaciones concretas, que después son utilizadas para la comunicación con la API.
@@ -126,10 +127,10 @@ struct InfoCardView: View {
             
             Divider()
             
-            Text(infoText)
-                .font(.body)
-            
-            Spacer()
+            ScrollView {
+                Text(infoText)
+                    .font(.body)
+            }
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
