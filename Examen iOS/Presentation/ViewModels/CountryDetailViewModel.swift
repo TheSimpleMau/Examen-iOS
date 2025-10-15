@@ -25,7 +25,7 @@ final class CountryDetailViewModel: ObservableObject {
             self.country = fetchedCountry
             saveLastVisitedCountry(name: fetchedCountry.name)
         } catch {
-            self.errorMessage = "Error al cargar el detalle del país: \(error.localizedDescription)"
+            self.errorMessage = "Error al cargar el detalle del país :(\n \(error.localizedDescription)"
             debugPrint(error)
         }
         self.isLoading = false

@@ -41,7 +41,7 @@ final class CountryListViewModel: ObservableObject {
                 let fetchedCountries = try await fetchAllCountriesUseCase.execute()
                 self.countries = fetchedCountries.sorted { $0.name < $1.name }
             } catch {
-                self.errorMessage = "Error al cargar los países: \(error.localizedDescription)"
+                self.errorMessage = "Error al cargar los países :(\n \(error.localizedDescription)"
             }
             self.isLoading = false
         }
