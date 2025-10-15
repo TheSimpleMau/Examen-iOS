@@ -1,3 +1,10 @@
+//
+//  CountryDetailView.swift
+//  Examen iOS
+//
+//  Created by Mauricio Olguín on 14/10/25.
+//
+
 import SwiftUI
 
 struct CountryDetailView: View {

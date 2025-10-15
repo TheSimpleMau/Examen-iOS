@@ -32,6 +32,7 @@ final class CountryListViewModel: ObservableObject {
         self.userPreferences = userPreferences
     }
     
+    /// Carga la lista de países desde el caso de uso y actualiza el estado del ViewModel.
     func loadCountries() {
         self.isLoading = true
         self.errorMessage = nil
@@ -58,6 +59,8 @@ final class CountryListViewModel: ObservableObject {
         }
     }
     
+    /// Obtiene el nombre del último país visitado desde las preferencias del usuario.
+    /// - Returns: El nombre del país como un String opcional.
     func getLastVisitedCountryName() -> String? {
         userPreferences.getLastVisitedCountry()
     }

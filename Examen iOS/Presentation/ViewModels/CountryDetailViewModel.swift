@@ -1,3 +1,10 @@
+//
+//  CountryDetailViewModel.swift
+//  Examen iOS
+//
+//  Created by Mauricio Olguín on 14/10/25.
+//
+
 import Foundation
 import Combine
 
@@ -16,6 +23,8 @@ final class CountryDetailViewModel: ObservableObject {
         self.userPreferences = userPreferences
     }
     
+    /// Carga el detalle de un país específico por su nombre y actualiza el estado del ViewModel.
+    /// - Parameter name: El nombre del país a cargar.
     func loadCountryDetail(name: String) async {
         self.country = nil
         self.isLoading = true
@@ -41,6 +50,8 @@ final class CountryDetailViewModel: ObservableObject {
         self.isLoading = false
     }
     
+    /// Guarda el nombre del último país visitado utilizando la instancia de UserPreferences.
+    /// - Parameter name: El nombre del país que se va a guardar.
     private func saveLastVisitedCountry(name: String) {
         userPreferences.saveLastVisitedCountry(countryName: name)
     }
