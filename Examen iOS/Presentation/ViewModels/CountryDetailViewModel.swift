@@ -25,8 +25,18 @@ final class CountryDetailViewModel: ObservableObject {
             self.country = fetchedCountry
             saveLastVisitedCountry(name: fetchedCountry.name)
         } catch {
-            self.errorMessage = "Error al cargar el detalle del país: \(error.localizedDescription)"
-            debugPrint(error)
+            if let apiError = error as? CountryAPIError {
+                switch apiError {
+                case .noInternetConnection:
+                    self.errorMessage = "error con la conexión\n¿tienes internet 🧐? verificalo para continuar"
+                case .serverError:
+                    self.errorMessage = "error el servidor ;( \nintenta más tarde"
+                default:
+                    self.errorMessage = "Error al cargar el detalle del país :(\n \(error.localizedDescription)"
+                }
+            } else {
+                self.errorMessage = "Error al cargar el detalle del país :(\n \(error.localizedDescription)"
+            }
         }
         self.isLoading = false
     }

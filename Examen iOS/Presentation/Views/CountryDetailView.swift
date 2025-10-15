@@ -47,11 +47,11 @@ struct CountryDetailView: View {
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                             
-                            InfoRow(label: "Capital", value: country.capital ?? "N/A")
-                            InfoRow(label: "Población", value: "\(country.population ?? 0)")
-                            InfoRow(label: "Región", value: country.region ?? "N/A")
-                            InfoRow(label: "Subregión", value: country.subregion ?? "N/A")
-                            InfoRow(label: "Idiomas", value: country.languages?.joined(separator: ", ") ?? "N/A")
+                            InfoRow(label: "Capital", value: country.capital ?? "Este país no cuenta con capítal")
+                            if let population = country.population { InfoRow(label: "Población", value: "\(population)" ) }
+                            if let region = country.region { InfoRow(label: "Región", value: "\(region)") }
+                            if let subregion = country.subregion { InfoRow(label: "Subregión", value: "\(subregion)") }
+                            if let languages = country.languages { InfoRow(label: "Idiomas", value: languages.joined(separator: ", ")) }
                             if let currencies = country.currencies {
                                 ForEach(currencies, id: \.code) { currency in
                                     InfoRow(
