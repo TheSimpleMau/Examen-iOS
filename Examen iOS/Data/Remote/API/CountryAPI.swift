@@ -10,6 +10,7 @@ import Alamofire
 
 enum CountryAPIError: Error {
     case badURL
+    case noInternetConnection
     case serverError(statusCode: Int)
     case decoding(Error)
     case other(Error)
@@ -44,7 +45,9 @@ final class CountryAPI: CountryAPIProtocol {
                     case .success(let value):
                         continuation.resume(returning: value)
                     case .failure(let error):
-                        if let statusCode = response.response?.statusCode {
+                        if let urlError = error.asAFError?.underlyingError as? URLError, urlError.code == .notConnectedToInternet {
+                            continuation.resume(throwing: CountryAPIError.noInternetConnection)
+                        } else if let statusCode = response.response?.statusCode, statusCode >= 500 {
                             continuation.resume(throwing: CountryAPIError.serverError(statusCode: statusCode))
                         } else if error.isResponseSerializationError {
                             continuation.resume(throwing: CountryAPIError.decoding(error))
